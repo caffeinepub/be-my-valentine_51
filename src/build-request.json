@@ -1,0 +1,228 @@
+{
+  "kind": "build_request",
+  "title": "Create 'Be My Valentine' interactive romantic multi-section page with animations, music, and playful buttons",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a single-page React (TypeScript) experience that reproduces the provided HTML concept as 5 sequential sections (\"pages\") with a Next button to navigate forward (Page 1 → Page 5) and a smooth fade-in transition when the active page changes.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "<!-- PAGE 1 --> ... <button onclick=\"nextPage(2)\">Next ➜</button>",
+          "<!-- PAGE 5 --> ...",
+          "@keyframes fade { from { opacity: 0; } to { opacity: 1; } }"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App renders 5 distinct sections with the same headings/structure as the provided HTML, adapted to React components.",
+        "Only one page is visible at a time; the active page fades in on change.",
+        "A Next button is present on pages 1–4 and navigates to the next page."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Convert all user-facing text to English and ensure no non-English paragraph text is shown in the UI; preserve the romantic tone and overall meaning of Page 5 content while rewriting it fully in English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Use English for any user-facing text in the build request.",
+          "<p>Ammmu un iru vizhigali ... Pondati 😘</p>"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All visible paragraphs/headings/buttons are in English (emojis may remain).",
+        "The long Page 5 paragraph is replaced with an English-only romantic message of similar intent (no Tamil/non-English words shown)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Recreate the ambient animations from the provided HTML using React-safe DOM management (create/remove elements cleanly to avoid memory leaks): falling hearts, glitter sparkles, floating roses, floating kiss bubbles, and a bouncing teddy in the bottom-right corner.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "// Falling hearts ... setInterval(createHeart, 500);",
+          "// Glitter ... setInterval(spawnGlitter, 400);",
+          "function spawnRose() { ... } setInterval(spawnRose, 900);",
+          "function spawnKiss() { ... } setInterval(spawnKiss, 1200);",
+          "// Teddy ... teddy.className = 'teddy' ... animation: teddyBounce"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Falling hearts continuously appear at random x positions and fall off-screen; each heart is removed after a short lifetime.",
+        "Glitter sparkles appear at random positions and fade/scale out; sparkles are removed after their animation.",
+        "Roses rise from the bottom and rotate; each rose is removed after a short lifetime.",
+        "Kiss bubbles float upward and fade; each bubble is removed after a short lifetime.",
+        "A teddy element is visible bottom-right and bounces continuously."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement the playful 'No' button behavior on Page 5: clicking 'No' moves the button to a random position within the viewport so it is difficult to click repeatedly.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "<button id=\"noBtn\" onclick=\"moveNo()\">No 😢</button>",
+          "function moveNo() { const no = document.getElementById('noBtn'); no.style.left = Math.random() * 80 + '%'; no.style.top = Math.random() * 80 + '%'; }"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On Page 5, clicking 'No' relocates the button to a new random on-screen position (kept within the visible viewport).",
+        "The 'No' button remains clickable and does not move off-screen."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Replace the Page 5 'Yes' button JavaScript alert with an in-app UI confirmation state (e.g., modal/dialog or inline success message) that celebrates the 'Yes' response.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "<button id=\"yesBtn\" onclick=\"alert('Yay! You said YES! ❤️')\">Yes 💕</button>"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking 'Yes' shows a visible success/celebration message in the UI without using window.alert.",
+        "The confirmation UI can be dismissed or remains visible without breaking navigation/animations."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Add a loading screen overlay that displays a heart and an English 'Loading…' message on initial load, then automatically disappears after ~2 seconds.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "<div id=\"loader\">... Loading Love…</div>",
+          "window.onload = function() { setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 2000); }"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A full-screen loading overlay is shown when the app first renders.",
+        "The overlay automatically hides after approximately 2 seconds.",
+        "After hiding, the user can interact with the app normally."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Support background music playback via a bundled local audio asset and provide basic user controls (play/pause and mute/unmute). If autoplay is blocked by the browser, the UI must prompt the user to start playback.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "<audio id=\"bgMusic\" autoplay loop>",
+          "music.src = 'papa_eppadi_vandhaayo.mp3'; music.play();"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Music plays in a loop once started (autoplay if allowed; otherwise after user gesture).",
+        "A visible control is present to play/pause and mute/unmute.",
+        "The audio source is a local file bundled with the frontend static assets."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Support the four images referenced in the provided HTML (photo1.jpg, photo2.jpg, photo3.jpg, yourphoto.jpg) as static assets and render them on their respective pages with rounded corners.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "<img src=\"photo1.jpg\" width=\"250\" style=\"border-radius:15px; margin-top:10px;\" />",
+          "<img src=\"photo2.jpg\" width=\"250\" style=\"border-radius:15px; margin-top:10px;\" />",
+          "<img src=\"photo3.jpg\" width=\"250\" style=\"border-radius:15px; margin-top:10px;\" />",
+          "<img src=\"yourphoto.jpg\" width=\"260\" style=\"border-radius:15px; margin-top:10px;\" />"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Pages 2–5 each display the correct image with rounded corners and spacing similar to the provided HTML.",
+        "Images are served as frontend static assets (no backend image routing).",
+        "If an image file is missing, the UI shows a graceful placeholder state without crashing."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Make the page mobile-friendly: ensure content fits smaller screens, maintain comfortable padding, and keep animations from blocking scrolling/taps (animations must not intercept pointer events).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />",
+          "document.body.style.padding = '20px';",
+          "pointer-events: none; (glitter)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On mobile widths, text and buttons remain readable and centered without horizontal overflow.",
+        "Ambient animation layers do not block button taps/clicks.",
+        "Layout uses responsive styling (Tailwind) rather than relying on direct document.body style mutation."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Apply a coherent Valentine-themed visual design using Tailwind (avoid a blue/purple primary palette): soft romantic background, consistent typography scale, card-like page container, and button styles consistent across all pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "background: #ffe6eb;",
+          "font-family: 'Poppins', sans-serif;",
+          "button { ... background: #e6004c; ... }"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The UI has a consistent Valentine aesthetic (e.g., warm pinks/reds, soft neutrals) across all pages.",
+        "Buttons, headings, and paragraph styling are consistent across pages.",
+        "Design avoids a blue/purple primary palette."
+      ]
+    }
+  ],
+  "constraints": [
+    "Frontend must be built with React + TypeScript and styled with Tailwind CSS and shadcn/ui composition (do not edit read-only component sources under frontend/src/components/ui).",
+    "Do not modify files under the immutable paths listed in SYSTEM_CONTEXT; compose them instead.",
+    "Backend must remain single-actor Motoko; do not introduce additional backend services."
+  ],
+  "nonGoals": [
+    "Implementing Internet Identity authentication.",
+    "Persisting user responses or analytics to the backend.",
+    "Adding external music/image hosting or third-party APIs.",
+    "Adding real-time features (websockets/chat/push notifications)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

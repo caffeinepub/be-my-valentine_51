@@ -1,0 +1,18 @@
+{
+  "frontend/src/App.tsx": "Main application component managing page state (1-5), loading overlay, ambient animations, and music controls with fade-in transitions between pages.",
+  "frontend/src/features/valentine/ValentinePages.tsx": "Five sequential page components (Page1-Page5) containing romantic messages, images, navigation buttons, and the final Yes/No question with celebration dialog.",
+  "frontend/src/features/valentine/components/ValentineLayout.tsx": "Layout wrapper providing the romantic pink background, centered card container, and footer with caffeine.ai attribution.",
+  "frontend/src/features/valentine/components/ValentineButton.tsx": "Reusable button component styled with Valentine theme colors (pink/red) and hover effects using shadcn/ui Button composition.",
+  "frontend/src/features/valentine/components/RoundedImage.tsx": "Image component with rounded corners, shadow, and graceful error handling showing a placeholder icon when images fail to load.",
+  "frontend/src/features/valentine/components/EvasiveNoButton.tsx": "Playful \"No\" button that randomly repositions itself within viewport boundaries when clicked, making it difficult to press.",
+  "frontend/src/features/valentine/components/YesCelebrationDialog.tsx": "Modal dialog using shadcn/ui Dialog that displays a celebratory message with hearts and emojis when \"Yes\" is clicked.",
+  "frontend/src/features/valentine/components/LoadingOverlay.tsx": "Full-screen loading overlay with pulsing heart and \"Loading Love…\" text that auto-fades after 2 seconds.",
+  "frontend/src/features/valentine/components/AmbientLayer.tsx": "Fixed-position container for ambient animations (hearts, sparkles, roses, kisses) and bouncing teddy bear element.",
+  "frontend/src/features/valentine/hooks/useAmbientAnimations.ts": "React hook managing lifecycle of ambient DOM animations (spawning/removing hearts, sparkles, roses, kisses, cursor hearts) with proper cleanup, accepting a RefObject that can be null.",
+  "frontend/src/features/valentine/components/MusicControls.tsx": "Fixed top-right controls for background music with play/pause and mute/unmute buttons, showing \"Play Music\" prompt when autoplay is blocked.",
+  "frontend/src/features/valentine/hooks/useBackgroundMusic.ts": "Hook managing HTMLAudioElement lifecycle for looping background music with autoplay detection and user gesture handling.",
+  "frontend/src/index.css": "Global styles with Valentine-themed OKLCH color palette (warm pinks/reds), custom animations (fade, pulse, fall, rise, float), and utility classes for ambient effects.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with Valentine color tokens and maintaining existing shadcn/ui theme structure.",
+  "frontend/src/lib/utils.ts": "Utility function for merging Tailwind CSS classes using clsx and tailwind-merge.",
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as backend has no methods; all functionality is client-side only."
+}

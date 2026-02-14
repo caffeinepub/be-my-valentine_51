@@ -1,0 +1,271 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Be My Valentine — interactive multi-section React page",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create a 5-section single-page experience with Next navigation and a fade-in transition when switching sections.",
+      "acceptanceCriteria": [
+        "App renders 5 distinct sections with the same headings/structure as the provided HTML, adapted to React components.",
+        "Only one page is visible at a time; the active page fades in on change.",
+        "A Next button is present on pages 1–4 and navigates to the next page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the main Valentine experience container with state-driven current page (1–5), render exactly one page at a time, and apply a smooth fade-in transition on page changes."
+        },
+        {
+          "path": "frontend/src/features/valentine/ValentinePages.tsx",
+          "operation": "create",
+          "description": "Create React components for Page1–Page5 with the required headings/structure and Next button wiring for pages 1–4."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Add Tailwind base layers plus custom keyframes/utility classes needed for the fade-in transition (and shared animation utilities used across the experience)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Ensure all user-facing copy is English-only and rewrite the long Page 5 paragraph as an English romantic message with similar intent.",
+      "acceptanceCriteria": [
+        "All visible paragraphs/headings/buttons are in English (emojis may remain).",
+        "The long Page 5 paragraph is replaced with an English-only romantic message of similar intent (no Tamil/non-English words shown)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/valentine/ValentinePages.tsx",
+          "operation": "modify",
+          "description": "Replace all page copy with English-only text; fully rewrite Page 5 long paragraph into an English romantic message with similar tone/intent while keeping headings/buttons consistent."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Recreate ambient animations with React-safe lifecycle management: falling hearts, glitter sparkles, floating roses, floating kiss bubbles, and a bouncing teddy bottom-right.",
+      "acceptanceCriteria": [
+        "Falling hearts continuously appear at random x positions and fall off-screen; each heart is removed after a short lifetime.",
+        "Glitter sparkles appear at random positions and fade/scale out; sparkles are removed after their animation.",
+        "Roses rise from the bottom and rotate; each rose is removed after a short lifetime.",
+        "Kiss bubbles float upward and fade; each bubble is removed after a short lifetime.",
+        "A teddy element is visible bottom-right and bounces continuously."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/valentine/hooks/useAmbientAnimations.ts",
+          "operation": "create",
+          "description": "Implement a React hook that spawns/removes animation DOM elements on intervals with proper cleanup (clear timers, remove nodes) to avoid memory leaks; expose a mount point ref for the animation layer."
+        },
+        {
+          "path": "frontend/src/features/valentine/components/AmbientLayer.tsx",
+          "operation": "create",
+          "description": "Create a fixed-position ambient animation layer that hosts spawned hearts/glitter/roses/kiss bubbles and renders a bottom-right bouncing teddy element; ensure layer is visually behind content."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the ambient layer and hook into the top-level experience so animations run continuously while the user navigates pages."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add required keyframes and class styles for hearts/glitter/rose/kiss/teddy animations (including lifetimes/fade/scale/rotation/bounce) in a React-safe way (no global DOM mutations)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement the evasive Page 5 'No' button that relocates to a random on-screen position when clicked.",
+      "acceptanceCriteria": [
+        "On Page 5, clicking 'No' relocates the button to a new random on-screen position (kept within the visible viewport).",
+        "The 'No' button remains clickable and does not move off-screen."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/valentine/components/EvasiveNoButton.tsx",
+          "operation": "create",
+          "description": "Create a Page 5-specific button component that uses a ref and viewport-aware random positioning (clamped to visible bounds) to move the button on each click while keeping it clickable."
+        },
+        {
+          "path": "frontend/src/features/valentine/ValentinePages.tsx",
+          "operation": "modify",
+          "description": "Use the EvasiveNoButton component on Page 5 and ensure it is positioned relative to a suitable container/viewport so it cannot move off-screen."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Replace the Page 5 'Yes' alert with an in-app celebration confirmation UI state.",
+      "acceptanceCriteria": [
+        "Clicking 'Yes' shows a visible success/celebration message in the UI without using window.alert.",
+        "The confirmation UI can be dismissed or remains visible without breaking navigation/animations."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/valentine/components/YesCelebrationDialog.tsx",
+          "operation": "create",
+          "description": "Implement an in-app confirmation UI (prefer shadcn/ui Dialog composition for a celebratory modal) triggered by 'Yes' that can be dismissed. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/valentine/ValentinePages.tsx",
+          "operation": "modify",
+          "description": "Wire the Page 5 'Yes' button to open the in-app confirmation UI (instead of window.alert) and ensure the celebration state does not interfere with animations or page state."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Add a full-screen loading overlay with a heart and English 'Loading…' message that hides after ~2 seconds.",
+      "acceptanceCriteria": [
+        "A full-screen loading overlay is shown when the app first renders.",
+        "The overlay automatically hides after approximately 2 seconds.",
+        "After hiding, the user can interact with the app normally."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/valentine/components/LoadingOverlay.tsx",
+          "operation": "create",
+          "description": "Create a full-screen overlay component with a heart visual and English 'Loading…' message, controlled by a 2-second timer and removed/hidden cleanly."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Show the LoadingOverlay on initial mount and automatically hide it after ~2 seconds without blocking subsequent interaction."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add looping background music from a bundled local audio asset with play/pause and mute/unmute controls and an autoplay-blocked prompt.",
+      "acceptanceCriteria": [
+        "Music plays in a loop once started (autoplay if allowed; otherwise after user gesture).",
+        "A visible control is present to play/pause and mute/unmute.",
+        "The audio source is a local file bundled with the frontend static assets."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/audio/papa_eppadi_vandhaayo.mp3",
+          "operation": "create",
+          "description": "Add the bundled local background music asset used by the app (looped playback once started)."
+        },
+        {
+          "path": "frontend/src/features/valentine/components/MusicControls.tsx",
+          "operation": "create",
+          "description": "Create a small UI control bar with play/pause and mute/unmute; detect autoplay failure and show an English prompt/button requiring user gesture to start playback."
+        },
+        {
+          "path": "frontend/src/features/valentine/hooks/useBackgroundMusic.ts",
+          "operation": "create",
+          "description": "Implement a hook to manage an HTMLAudioElement lifecycle, looped playback, play/pause, mute/unmute, and autoplay-block handling (reject handling + UI state)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire MusicControls into the experience layout and connect it to the useBackgroundMusic hook, using the local audio asset under frontend/public."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Bundle and render the four referenced images as static assets on pages 2–5 with rounded corners and graceful placeholders if missing.",
+      "acceptanceCriteria": [
+        "Pages 2–5 each display the correct image with rounded corners and spacing similar to the provided HTML.",
+        "Images are served as frontend static assets (no backend image routing).",
+        "If an image file is missing, the UI shows a graceful placeholder state without crashing."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/images/photo1.jpg",
+          "operation": "create",
+          "description": "Add static image asset for Page 2 (photo1.jpg)."
+        },
+        {
+          "path": "frontend/public/assets/images/photo2.jpg",
+          "operation": "create",
+          "description": "Add static image asset for Page 3 (photo2.jpg)."
+        },
+        {
+          "path": "frontend/public/assets/images/photo3.jpg",
+          "operation": "create",
+          "description": "Add static image asset for Page 4 (photo3.jpg)."
+        },
+        {
+          "path": "frontend/public/assets/images/yourphoto.jpg",
+          "operation": "create",
+          "description": "Add static image asset for Page 5 (yourphoto.jpg)."
+        },
+        {
+          "path": "frontend/src/features/valentine/components/RoundedImage.tsx",
+          "operation": "create",
+          "description": "Create an image component that renders rounded corners and spacing, and switches to a friendly placeholder UI on load error (missing asset)."
+        },
+        {
+          "path": "frontend/src/features/valentine/ValentinePages.tsx",
+          "operation": "modify",
+          "description": "Render the correct static image on Pages 2–5 using RoundedImage and the bundled asset paths; ensure layout matches the provided concept closely."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Make the experience mobile-friendly with responsive layout and ensure ambient animations never intercept pointer events.",
+      "acceptanceCriteria": [
+        "On mobile widths, text and buttons remain readable and centered without horizontal overflow.",
+        "Ambient animation layers do not block button taps/clicks.",
+        "Layout uses responsive styling (Tailwind) rather than relying on direct document.body style mutation."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Adjust layout to be responsive with Tailwind (centered content, max-width, comfortable padding, responsive typography) and ensure no document.body style mutations are used for spacing."
+        },
+        {
+          "path": "frontend/src/features/valentine/components/AmbientLayer.tsx",
+          "operation": "modify",
+          "description": "Ensure all ambient animation containers use pointer-events-none and proper z-index stacking so taps/clicks reach the content/buttons."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add any required global responsive/base styles (via Tailwind layers) to prevent horizontal overflow and keep tap targets comfortable on small screens."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Apply a coherent Valentine-themed Tailwind design: warm romantic background, consistent typography, card-like container, and consistent button styling across all pages (no blue/purple primary palette).",
+      "acceptanceCriteria": [
+        "The UI has a consistent Valentine aesthetic (e.g., warm pinks/reds, soft neutrals) across all pages.",
+        "Buttons, headings, and paragraph styling are consistent across pages.",
+        "Design avoids a blue/purple primary palette."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/valentine/components/ValentineLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout wrapper providing the romantic background, centered card container, consistent spacing, and typography scale using Tailwind (no blue/purple primary palette)."
+        },
+        {
+          "path": "frontend/src/features/valentine/components/ValentineButton.tsx",
+          "operation": "create",
+          "description": "Create a consistent button component styled with Tailwind (and, where appropriate, shadcn/ui Button composition) to unify button appearance across pages. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the page content with ValentineLayout and replace ad-hoc button styles with the shared ValentineButton to ensure consistent design across Pages 1–5."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme tokens (as needed) to support the Valentine palette/typography (warm pink/red/neutral) while avoiding blue/purple primaries; keep changes compatible with existing shadcn/ui theming."
+        }
+      ]
+    }
+  ]
+}

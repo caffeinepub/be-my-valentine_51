@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.625rem;
+        
+        /* Valentine color palette - warm pinks and reds */
+        --valentine-bg: 0.95 0.08 15;
+        --valentine-card: 0.98 0.02 15;
+        --valentine-primary: 0.55 0.22 15;
+        --valentine-primary-hover: 0.45 0.24 15;
+        --valentine-text: 0.35 0.05 15;
+        --valentine-muted: 0.92 0.05 15;
+        
+        --background: var(--valentine-bg);
+        --foreground: var(--valentine-text);
+        --card: var(--valentine-card);
+        --card-foreground: var(--valentine-text);
+        --popover: var(--valentine-card);
+        --popover-foreground: var(--valentine-text);
+        --primary: var(--valentine-primary);
+        --primary-foreground: 0.985 0 0;
+        --secondary: 0.97 0.05 15;
+        --secondary-foreground: 0.205 0 0;
+        --muted: var(--valentine-muted);
+        --muted-foreground: 0.556 0.05 15;
+        --accent: 0.97 0.05 15;
+        --accent-foreground: 0.205 0 0;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.88 0.05 15;
+        --input: 0.88 0.05 15;
+        --ring: 0.708 0.15 15;
+        --chart-1: 0.646 0.222 41.116;
+        --chart-2: 0.6 0.118 184.704;
+        --chart-3: 0.398 0.07 227.392;
+        --chart-4: 0.828 0.189 84.429;
+        --chart-5: 0.769 0.188 70.08;
+    }
+
+    .dark {
+        --valentine-bg: 0.15 0.05 15;
+        --valentine-card: 0.22 0.05 15;
+        --valentine-primary: 0.65 0.20 15;
+        --valentine-primary-hover: 0.55 0.22 15;
+        --valentine-text: 0.90 0.03 15;
+        --valentine-muted: 0.30 0.05 15;
+        
+        --background: var(--valentine-bg);
+        --foreground: var(--valentine-text);
+        --card: var(--valentine-card);
+        --card-foreground: var(--valentine-text);
+        --popover: 0.269 0.05 15;
+        --popover-foreground: 0.985 0 0;
+        --primary: var(--valentine-primary);
+        --primary-foreground: 0.205 0 0;
+        --secondary: 0.269 0.05 15;
+        --secondary-foreground: 0.985 0 0;
+        --muted: var(--valentine-muted);
+        --muted-foreground: 0.708 0.03 15;
+        --accent: 0.371 0.05 15;
+        --accent-foreground: 0.985 0 0;
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.205 0 0;
+        --border: 1 0 0 / 10%;
+        --input: 1 0 0 / 15%;
+        --ring: 0.556 0.15 15;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+}
+
+@layer utilities {
+    /* Fade in animation */
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.7s ease-in-out;
+    }
+
+    /* Fade out animation for loading */
+    @keyframes fade-out {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    .animate-fade-out {
+        animation: fade-out 0.5s ease-in-out 1.5s forwards;
+    }
+
+    /* Heart pulse animation */
+    @keyframes pulse-heart {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 0.8;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+    }
+
+    .animate-pulse-heart {
+        animation: pulse-heart 1.2s ease-in-out infinite;
+    }
+
+    /* Teddy bounce animation */
+    @keyframes teddy-bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .animate-teddy-bounce {
+        animation: teddy-bounce 2.5s ease-in-out infinite;
+    }
+
+    /* Falling hearts */
+    @keyframes heart-fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+
+    .heart-fall {
+        position: fixed;
+        top: -50px;
+        animation: heart-fall linear forwards;
+        pointer-events: none;
+    }
+
+    /* Sparkle animation */
+    @keyframes sparkle {
+        0% {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(2) rotate(180deg);
+            opacity: 0;
+        }
+    }
+
+    .sparkle-anim {
+        position: absolute;
+        animation: sparkle 1.5s linear forwards;
+        pointer-events: none;
+    }
+
+    /* Rose rise animation */
+    @keyframes rose-rise {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+        }
+        20% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-120vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    .rose-rise {
+        position: fixed;
+        bottom: -50px;
+        animation: rose-rise linear forwards;
+        pointer-events: none;
+    }
+
+    /* Kiss float animation */
+    @keyframes kiss-float {
+        0% {
+            transform: translateY(0) scale(0.8);
+            opacity: 0;
+        }
+        40% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-200px) scale(1.4);
+            opacity: 0;
+        }
+    }
+
+    .kiss-float {
+        position: fixed;
+        bottom: 10px;
+        animation: kiss-float 4s ease-in-out forwards;
+        pointer-events: none;
+    }
+
+    /* Cursor heart animation */
+    .cursor-heart {
+        position: fixed;
+        font-size: 18px;
+        pointer-events: none;
+        animation: kiss-float 2s linear forwards;
+    }
+
+    /* Valentine card styling */
+    .valentine-card {
+        backdrop-filter: blur(10px);
+        background: oklch(var(--valentine-card) / 0.95);
+    }
+
+    .shadow-valentine {
+        box-shadow: 0 20px 60px -15px oklch(var(--valentine-primary) / 0.3);
+    }
+
+    /* Custom color utilities */
+    .bg-valentine-bg {
+        background-color: oklch(var(--valentine-bg));
+    }
+
+    .bg-valentine-card {
+        background-color: oklch(var(--valentine-card));
+    }
+
+    .bg-valentine-primary {
+        background-color: oklch(var(--valentine-primary));
+    }
+
+    .bg-valentine-primary-hover {
+        background-color: oklch(var(--valentine-primary-hover));
+    }
+
+    .bg-valentine-muted {
+        background-color: oklch(var(--valentine-muted));
+    }
+
+    .text-valentine-primary {
+        color: oklch(var(--valentine-primary));
+    }
+
+    .text-valentine-text {
+        color: oklch(var(--valentine-text));
+    }
+
+    .border-valentine-primary {
+        border-color: oklch(var(--valentine-primary));
+    }
+}
