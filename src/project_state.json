@@ -1,13 +1,12 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
-  "summary": "Build a single-page 'Be My Valentine' interactive web page with multiple sections, animations (falling hearts, glitter, roses, kisses, teddy), playful Yes/No buttons, loading screen, and background music, using HTML/CSS/JS and local media assets.",
+  "projectStateVersion": 7,
+  "summary": "Build a single-page 'Be My Valentine' interactive web page with multiple sections, animations (falling hearts, glitter, roses, kisses, teddy), playful Yes/No buttons, and a loading screen, without photos and without background music.",
   "architectural_notes": [
     "Single HTML file with inline CSS and JS to control page navigation (show/hide sections).",
     "Uses timed DOM element spawning via setInterval for effects (hearts, glitter sparkles, roses, kisses, teddy).",
-    "Requires local static assets: images (photo1.jpg, photo2.jpg, photo3.jpg, yourphoto.jpg) and audio (papa_eppadi_vandhaayo.mp3/music.mp3).",
     "Includes full-screen loading overlay that hides after a timeout.",
-    "Plays looping background music via <audio> element and JS source assignment."
+    "Remove dependency on local static media assets (photos/audio); the experience should function without bundled images and without background music."
   ],
   "known_issues": [],
   "isFixRequest": false,
@@ -91,12 +90,50 @@
         "REQ-10"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-short-developer-facing-note-in-repo-explaining-where-to-place-replace-the-photo-and-audio-files-the-exact-required-paths-under-frontend-public-assets-so-future-swaps-do-not-require-code-changes",
+      "title": "Add a short developer-facing note in-repo explaining where to place/replace the photo and audio files (the exact required paths under frontend public assets) so future swaps do not require code changes.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-all-background-music-functionality-from-the-valentine-app-so-no-audio-file-is-loaded-or-played-and-no-music-ui-is-shown",
+      "title": "Remove all background music functionality from the Valentine app so no audio file is loaded or played and no music UI is shown.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-all-photo-rendering-from-the-valentine-pages-so-no-image-assets-are-referenced-or-displayed-on-any-of-the-five-pages",
+      "title": "Remove all photo rendering from the Valentine pages so no image assets are referenced or displayed on any of the five pages.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-developer-facing-asset-documentation-to-reflect-that-photos-and-background-music-are-no-longer-required-by-the-app",
+      "title": "Update the developer-facing asset documentation to reflect that photos and background music are no longer required by the app.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
     {
       "id": "AR-1",
       "summary": "Create 'Be My Valentine' interactive multi-page/section romantic web page (HTML/CSS/JS) with animations, images, and background music",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Remove/disable all photo rendering and background music playback from the Valentine page (no bundled images/audio; update UI accordingly).",
       "reqIds": [],
       "status": "pending"
     }

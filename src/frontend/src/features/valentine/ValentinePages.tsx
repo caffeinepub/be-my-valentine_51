@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ValentineButton } from './components/ValentineButton';
-import { RoundedImage } from './components/RoundedImage';
 import { EvasiveNoButton } from './components/EvasiveNoButton';
 import { YesCelebrationDialog } from './components/YesCelebrationDialog';
 
@@ -31,8 +30,7 @@ export function Page2({ onNext }: PageProps) {
       <p className="text-lg md:text-xl text-valentine-text max-w-2xl mx-auto mb-8">
         Every day with you feels like a blessing. You make my world softer, brighter, and infinitely happier.
       </p>
-      <RoundedImage src="/assets/images/photo1.jpg" alt="Our memory together" />
-      <ValentineButton onClick={onNext} className="mt-8">
+      <ValentineButton onClick={onNext}>
         Next ➜
       </ValentineButton>
     </div>
@@ -48,8 +46,7 @@ export function Page3({ onNext }: PageProps) {
       <p className="text-lg md:text-xl text-valentine-text max-w-2xl mx-auto mb-8">
         Your smile, your voice, your presence — they mean more to me than you'll ever know. You make even the simplest moments unforgettable.
       </p>
-      <RoundedImage src="/assets/images/photo2.jpg" alt="Special moment" />
-      <ValentineButton onClick={onNext} className="mt-8">
+      <ValentineButton onClick={onNext}>
         Next ➜
       </ValentineButton>
     </div>
@@ -65,8 +62,7 @@ export function Page4({ onNext }: PageProps) {
       <p className="text-lg md:text-xl text-valentine-text max-w-2xl mx-auto mb-8">
         I want to walk with you through every season of life. You're the one my heart feels safe with.
       </p>
-      <RoundedImage src="/assets/images/photo3.jpg" alt="Together forever" />
-      <ValentineButton onClick={onNext} className="mt-8">
+      <ValentineButton onClick={onNext}>
         Next ➜
       </ValentineButton>
     </div>
@@ -81,7 +77,6 @@ export function Page5() {
       <h1 className="text-4xl md:text-5xl font-bold text-valentine-primary mb-6">
         So… Will You Be My Valentine? ❤️🌹
       </h1>
-      <RoundedImage src="/assets/images/yourphoto.jpg" alt="You" />
       <p className="text-base md:text-lg text-valentine-text max-w-2xl mx-auto my-8 leading-relaxed">
         Your eyes hold a sparkle that lights up my world, and your smile brings me more joy than words can express. 
         The gentle way you care, the warmth you share — it's made me fall completely and deeply in love with you. 

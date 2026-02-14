@@ -1,6 +1,6 @@
 {
-  "frontend/src/App.tsx": "Main application component managing page state (1-5), loading overlay, ambient animations, and music controls with fade-in transitions between pages.",
-  "frontend/src/features/valentine/ValentinePages.tsx": "Five sequential page components (Page1-Page5) containing romantic messages, images, navigation buttons, and the final Yes/No question with celebration dialog.",
+  "frontend/src/App.tsx": "Main application component managing page state (1-5), loading overlay, and ambient animations with fade-in transitions between pages (music controls removed).",
+  "frontend/src/features/valentine/ValentinePages.tsx": "Five sequential page components (Page1-Page5) containing romantic messages, navigation buttons, and the final Yes/No question with celebration dialog (all photo references removed).",
   "frontend/src/features/valentine/components/ValentineLayout.tsx": "Layout wrapper providing the romantic pink background, centered card container, and footer with caffeine.ai attribution.",
   "frontend/src/features/valentine/components/ValentineButton.tsx": "Reusable button component styled with Valentine theme colors (pink/red) and hover effects using shadcn/ui Button composition.",
   "frontend/src/features/valentine/components/RoundedImage.tsx": "Image component with rounded corners, shadow, and graceful error handling showing a placeholder icon when images fail to load.",
@@ -14,5 +14,6 @@
   "frontend/src/index.css": "Global styles with Valentine-themed OKLCH color palette (warm pinks/reds), custom animations (fade, pulse, fall, rise, float), and utility classes for ambient effects.",
   "frontend/tailwind.config.js": "Tailwind configuration extended with Valentine color tokens and maintaining existing shadcn/ui theme structure.",
   "frontend/src/lib/utils.ts": "Utility function for merging Tailwind CSS classes using clsx and tailwind-merge.",
-  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as backend has no methods; all functionality is client-side only."
+  "frontend/src/hooks/useQueries.ts": "Empty placeholder file as backend has no methods; all functionality is client-side only.",
+  "frontend/ASSETS.md": "Documentation file explaining that the app no longer requires photos or background music assets, with guidance on customizing messages, colors, and animations instead."
 }
